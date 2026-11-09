@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TripSathi | कम बजट, पूरा सफर</title>
+<style>
+:root{--ink:#12233d;--orange:#f47721;--orange2:#ff9a45;--bg:#f6f8fb;--muted:#64748b;--line:#e5eaf0;--green:#16865c}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--ink)}
+header{position:sticky;top:0;z-index:9;background:#fff;border-bottom:1px solid var(--line);padding:13px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{font-size:25px;font-weight:900;color:var(--ink);white-space:nowrap}.brand span{color:var(--orange)}nav{display:flex;gap:17px;flex-wrap:wrap}nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:14px}
+button,.btn{background:var(--orange);color:#fff;border:0;padding:12px 17px;border-radius:11px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+button.secondary,.secondary{background:#eef2f7;color:var(--ink)}button.dark{background:var(--ink)}button:disabled{opacity:.5;cursor:not-allowed}
+.hero{padding:60px 5%;background:linear-gradient(120deg,#10233f,#1c5274);color:#fff;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.12;margin:12px 0}.hero p{font-size:18px;line-height:1.7;color:#e3eef7;max-width:620px}
+.heroimg{min-height:330px;border-radius:24px;background:linear-gradient(0deg,#0004,#0000),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85') center/cover}
+.tag{display:inline-block;background:#fff0e3;color:#ad4a00;border-radius:30px;padding:6px 10px;font-size:12px;font-weight:900}
+main{max-width:1200px;margin:auto;padding:0 22px}.search{margin:22px auto;background:white;padding:18px;border:1px solid var(--line);border-radius:18px;box-shadow:0 7px 25px #12233d0b;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d7dee8;border-radius:10px;background:white;font:inherit;color:var(--ink)}label{display:block;font-weight:700;font-size:13px;margin:10px 0 6px}
+section{padding:35px 0}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:15px}.sectionhead h2{font-size:30px;margin:0 0 7px}.muted{color:var(--muted);line-height:1.5}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 5px 18px #10233f08}.photo{height:190px;background-size:cover;background-position:center;position:relative}.photo .badge{position:absolute;left:13px;top:13px;background:#fff;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:800}.cardbody{padding:17px}.card h3{font-size:22px;margin:10px 0}.price{font-size:24px;font-weight:900}.price small{font-size:12px;font-weight:normal;color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.featuregrid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.feature,.panel{background:white;border:1px solid var(--line);padding:18px;border-radius:15px}.feature strong{display:block;margin:8px 0}
+.page{display:none}.page.active{display:block}.breadcrumb{padding:15px 0;color:var(--muted);font-size:13px}.two{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}.summary{position:sticky;top:85px;height:max-content}.total{font-size:30px;font-weight:900;color:var(--orange)}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.step{background:#e9eef5;border-radius:20px;padding:8px 12px;font-size:12px;font-weight:bold}.step.active{background:#ffead8;color:#a64600}
+table{width:100%;border-collapse:collapse;background:#fff}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:14px}th{background:#f1f5f9}
+footer{margin-top:45px;background:var(--ink);color:white;padding:35px 5%;display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}footer a{color:#e4eef7}
+.notice{background:#fff6e8;border:1px solid #ffdcae;padding:12px;border-radius:10px;color:#7d4700;font-size:13px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.modalbox{max-width:600px;width:100%;max-height:90vh;overflow:auto;background:white;border-radius:18px;padding:22px}.close{float:right}
+.adminbar{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:17px;background:#fff;border:1px solid var(--line);border-radius:13px}.stat b{font-size:24px;display:block}
+.small{font-size:12px}.hidden{display:none!important}
+@media(max-width:800px){header{flex-wrap:wrap}nav{order:3;width:100%;justify-content:space-between}.hero{grid-template-columns:1fr;padding:40px 5%}.heroimg{min-height:220px}.search{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.featuregrid{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.summary{position:static}.stats{grid-template-columns:1fr 1fr}footer{grid-template-columns:1fr}.sectionhead{display:block}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand" onclick="showPage('home')" style="cursor:pointer">Trip<span>Sathi</span> 🧳</div>
+<nav><a href="#" onclick="showPage('home')">होम</a><a href="#tours" onclick="showPage('home')">टूर</a><a href="#" onclick="showPage('about')">हमारे बारे में</a><a href="#" onclick="showPage('contact')">संपर्क</a><a href="#" onclick="showPage('policies')">नीतियाँ</a></nav>
+<button onclick="showPage('admin')" class="secondary">Admin Demo</button>
+</header>
+
+<div id="home" class="page active">
+<div class="hero"><div><span class="tag">युवाओं के लिए बजट ट्रैवल</span><h1>कम बजट में घूमो,<br>यादें बनाओ!</h1><p>गाड़ी, ड्राइवर, लोकल गाइड और भोजन—एक ही पैकेज में। आप अपना टूर चुनें, बाकी सफर की योजना हम बनाएँगे।</p><button onclick="document.getElementById('tours').scrollIntoView({behavior:'smooth'})">टूर देखें ↓</button> <button class="secondary" onclick="showPage('contact')">हमसे बात करें</button></div><div class="heroimg"></div></div>
+<main>
+<div class="search"><div><label>गंतव्य</label><select id="searchDest"><option value="">सभी जगह</option><option>जैसलमेर</option><option>उदयपुर</option><option>माउंट आबू</option><option>पुष्कर</option></select></div><div><label>यात्रा तारीख</label><input type="date" id="searchDate"></div><div><label>बजट</label><select id="searchBudget"><option value="">कोई भी बजट</option><option value="1000">₹1,000 तक</option><option value="3000">₹3,000 तक</option><option value="5000">₹5,000 तक</option></select></div><div style="align-self:end"><button onclick="filterTours()">टूर खोजें</button></div></div>
+<section id="tours"><div class="sectionhead"><div><h2>लोकप्रिय टूर</h2><p class="muted">शुरुआत राजस्थान से—आगे पूरे भारत का सफर</p></div><span class="tag">Demo packages</span></div><div id="tourGrid" class="cards"></div><p class="notice">ये पैकेज और कीमतें डेमो डेटा हैं। लॉन्च से पहले वास्तविक लागत, तारीख, उपलब्ध सीटें और शामिल सेवाएँ अपडेट करें।</p></section>
+<section><h2>TripSathi क्यों?</h2><div class="featuregrid"><div class="feature">🚐<strong>गाड़ी और ड्राइवर</strong><span class="muted">साझा ग्रुप ट्रांसपोर्ट</span></div><div class="feature">🧭<strong>लोकल गाइड</strong><span class="muted">जगह को स्थानीय नजर से देखें</span></div><div class="feature">🍱<strong>खाना-पानी</strong><span class="muted">पैकेज के अनुसार शामिल</span></div><div class="feature">💸<strong>बजट फ्रेंडली</strong><span class="muted">पहले से स्पष्ट कीमत</span></div></div></section>
+<section><div class="panel"><h2>कैसे बुक करें?</h2><div class="row"><div>1. टूर चुनें</div><div>2. तारीख/सीट चुनें</div><div>3. यात्री विवरण भरें</div><div>4. बुकिंग रिक्वेस्ट भेजें</div></div><p class="muted">बुकिंग तभी कन्फर्म मानी जाएगी जब TripSathi टीम उपलब्धता और भुगतान की पुष्टि करे।</p></div></section>
+</main></div>
+
+<div id="booking" class="page"><main><div class="breadcrumb"><a href="#" onclick="showPage('home')">होम</a> / बुकिंग</div><div class="steps"><span class="step active">1. टूर</span><span class="step active">2. यात्री विवरण</span><span class="step">3. पुष्टि</span></div><h1>अपनी बुकिंग पूरी करें</h1><div class="two"><div class="panel"><h2>यात्री विवरण</h2><div class="notice">बुकिंग रिक्वेस्ट सबमिट होगी। यह प्रोटोटाइप वास्तविक पेमेंट या सीट लॉक नहीं करता।</div>
+<label>पूरा नाम *</label><input id="bName" placeholder="जैसे: धनराज">
+<label>मोबाइल नंबर *</label><input id="bPhone" inputmode="tel" placeholder="10 अंकों का मोबाइल नंबर">
+<label>ईमेल (वैकल्पिक)</label><input id="bEmail" type="email" placeholder="name@example.com">
+<label>यात्रा तारीख *</label><input id="bDate" type="date">
+<label>यात्रियों की संख्या *</label><select id="bCount" onchange="updateTotal()"><option value="1">1 यात्री</option><option value="2">2 यात्री</option><option value="3">3 यात्री</option><option value="4">4 यात्री</option><option value="5">5 यात्री</option><option value="6">6 यात्री</option></select>
+<label>पिकअप शहर</label><input id="bPickup" value="जोधपुर">
+<label>विशेष अनुरोध / भोजन संबंधी जानकारी</label><textarea id="bNotes" rows="3" placeholder="अगर कोई खास जरूरत हो"></textarea>
+<label><input type="checkbox" id="bAgree" style="width:auto"> मैं शर्तें और कैंसिलेशन नीति पढ़कर सहमत हूँ।</label>
+<button style="width:100%;margin-top:12px" onclick="submitBooking()">बुकिंग रिक्वेस्ट भेजें</button></div>
+<div class="panel summary"><h2>बुकिंग सारांश</h2><h3 id="sumName"></h3><p id="sumDesc" class="muted"></p><div class="row"><span>प्रति व्यक्ति</span><b id="sumPrice"></b></div><div class="row"><span>यात्री</span><b id="sumCount">1</b></div><hr><div class="row"><span>कुल अनुमानित राशि</span><span class="total" id="sumTotal"></span></div><p class="small muted">कर/अतिरिक्त शुल्क लागू हो सकते हैं। अंतिम मूल्य टीम कन्फर्म करेगी।</p></div></div></main></div>
+
+<div id="confirmation" class="page"><main><section class="panel" style="max-width:700px;margin:30px auto;text-align:center"><div style="font-size:55px">✅</div><h1>बुकिंग रिक्वेस्ट दर्ज हुई!</h1><p id="confirmText"></p><p class="notice">यह केवल डेमो में रिक्वेस्ट नंबर है। वास्तविक बुकिंग/टिकट कन्फर्मेशन नहीं है।</p><button onclick="showPage('home')">और टूर देखें</button><button class="secondary" onclick="showPage('admin')">Admin Demo देखें</button></section></main></div>
+
+<div id="about" class="page"><main><section><h1>TripSathi के बारे में</h1><div class="panel"><p>TripSathi का उद्देश्य युवाओं और बजट यात्रियों के लिए समूह यात्रा आसान बनाना है। एक पैकेज में ट्रांसपोर्ट, ड्राइवर, स्थानीय गाइड और भोजन जैसी सेवाएँ उपलब्ध कराने की योजना है।</p><p class="notice">यह फिलहाल एक वेबसाइट प्रोटोटाइप है। कंपनी का पंजीकरण, वास्तविक सेवा प्रदाता, बीमा, परमिट और संचालन संबंधी जानकारी लॉन्च से पहले जोड़ें।</p></div></section></main></div>
+
+<div id="contact" class="page"><main><section><h1>संपर्क करें</h1><div class="two"><div class="panel"><h2>बुकिंग सहायता</h2><p>अपना प्रश्न भेजें—हमारी टीम संपर्क करेगी।</p><label>नाम</label><input id="cName"><label>फोन</label><input id="cPhone"><label>सवाल</label><textarea id="cMsg" rows="4"></textarea><button onclick="contactRequest()">रिक्वेस्ट भेजें</button><p id="cResult" class="muted"></p></div><div class="panel"><h2>संपर्क विवरण</h2><p>WhatsApp: <b>+91 80009 16602</b><br><a href="https://wa.me/918000916602?text=Namaste%20TripSathi%2C%20mujhe%20tour%20booking%20ki%20jaankari%20chahiye" target="_blank">WhatsApp पर चैट करें</a></p><p>Email: <b>ईमेल जल्द जोड़ा जाएगा</b></p><p>ऑफिस: <b>अपना पता जोड़ें</b></p><p class="notice">इस डेमो में ग्राहक की रिक्वेस्ट सर्वर पर सेव नहीं होती।</p></div></div></section></main></div>
+
+<div id="policies" class="page"><main><section><h1>नीतियाँ और शर्तें</h1><div class="panel"><h3>बुकिंग</h3><p>बुकिंग रिक्वेस्ट, सीट और भुगतान की पुष्टि के बाद ही अंतिम मानी जाएगी।</p><h3>कैंसिलेशन / रिफंड</h3><p>लॉन्च से पहले टूर-वार कैंसिलेशन कटऑफ, रिफंड समय और गैर-वापसी योग्य खर्च स्पष्ट लिखें। अभी यह केवल placeholder है; वास्तविक नीति कानूनी समीक्षा के बाद प्रकाशित करें।</p><h3>यात्रा सुरक्षा</h3><p>यात्रियों को ड्राइवर, वाहन, संपर्क व्यक्ति, आपातकालीन नंबर और यात्रा कार्यक्रम साझा किया जाना चाहिए।</p><h3>Privacy</h3><p>नाम, फोन और ईमेल केवल बुकिंग के लिए लें। डेटा स्टोरेज, हटाने और साझा करने की नीति तथा सहमति वास्तविक सिस्टम में लागू करें।</p><h3>Terms</h3><p>सभी पैकेज, शामिल सेवाएँ, अतिरिक्त शुल्क, समय और जिम्मेदारियाँ स्पष्ट रूप से बताई जाएँ।</p></div></section></main></div>
+
+<div id="admin" class="page"><main><section><div class="row"><div><h1>Admin Dashboard (Demo)</h1><p class="muted">यह लोकल डेमो है—असली लॉगिन/सर्वर सुरक्षा नहीं है।</p></div><button onclick="showPage('home')">ग्राहक वेबसाइट</button></div><div class="stats"><div class="stat">कुल रिक्वेस्ट<b id="aCount">0</b></div><div class="stat">टूर पैकेज<b>4</b></div><div class="stat">सीट बुकिंग<b>Demo</b></div><div class="stat">स्थिति<b>Prototype</b></div></div><div class="adminbar"><button onclick="renderAdmin()">बुकिंग रिक्वेस्ट</button><button class="secondary" onclick="alert('डेमो में पैकेज संपादन UI अभी placeholder है। Backend में admin CRUD जोड़ा जाएगा।')">टूर मैनेज करें</button><button class="secondary" onclick="exportBookings()">CSV डाउनलोड</button><button class="secondary" onclick="clearBookings()">डेमो डेटा मिटाएँ</button></div><div class="panel"><h2>बुकिंग सूची</h2><div id="adminTable"></div></div></section></main></div>
+
+<footer><div><div class="brand" style="color:#fff">Trip<span>Sathi</span> 🧳</div><p>कम बजट, पूरा सफर।</p><p class="small">यात्रा का सपना, अब बजट में।</p></div><div><b>Explore</b><p><a href="#" onclick="showPage('home')">टूर</a><br><a href="#" onclick="showPage('about')">हमारे बारे में</a></p></div><div><b>Support</b><p><a href="#" onclick="showPage('contact')">संपर्क</a><br><a href="#" onclick="showPage('policies')">Refund / Privacy / Terms</a></p></div></footer>
+<a href="https://wa.me/918000916602?text=Namaste%20TripSathi%2C%20mujhe%20tour%20booking%20ki%20jaankari%20chahiye" target="_blank" aria-label="WhatsApp TripSathi" style="position:fixed;right:18px;bottom:18px;z-index:15;background:#20b45a;color:white;text-decoration:none;padding:14px 18px;border-radius:50px;font-weight:900;box-shadow:0 5px 18px #0003">☘ WhatsApp: 8000916602</a>
+
+<script>
+const tours=[
+{id:'JSM',dest:'जैसलमेर',name:'जैसलमेर डेजर्ट ट्रिप',duration:'2 दिन / 1 रात',price:2999,desc:'गोल्डन फोर्ट • लोकल गाइड • डेजर्ट अनुभव',img:'https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1000&q=80'},
+{id:'UDR',dest:'उदयपुर',name:'उदयपुर लेक ट्रिप',duration:'2 दिन / 1 रात',price:2499,desc:'लेक सिटी • दर्शनीय स्थल • लोकल गाइड',img:'https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1000&q=80'},
+{id:'ABU',dest:'माउंट आबू',name:'माउंट आबू हिल ट्रिप',duration:'2 दिन / 1 रात',price:2999,desc:'पहाड़ • नक्की लेक • प्रकृति',img:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1000&q=80'},
+{id:'PSK',dest:'पुष्कर',name:'पुष्कर वन-डे ट्रिप',duration:'1 दिन',price:999,desc:'पुष्कर झील • मंदिर • लोकल मार्केट',img:'https://images.unsplash.com/photo-1606293926075-69a00db17b5f?auto=format&fit=crop&w=1000&q=80'}
+];
+let selected=null;
+function money(n){return '₹'+n.toLocaleString('en-IN')}
+function renderTours(list=tours){document.getElementById('tourGrid').innerHTML=list.map(t=>`<div class="card"><div class="photo" style="background-image:url('${t.img}')"><span class="badge">${t.duration}</span></div><div class="cardbody"><span class="tag">${t.dest}</span><h3>${t.name}</h3><p class="muted">${t.desc}</p><div class="row"><div class="price">${money(t.price)} <small>/ व्यक्ति से</small></div></div><p class="muted small">गाड़ी + ड्राइवर + गाइड + पैकेज भोजन (उदाहरण)</p><button onclick="startBooking('${t.id}')">टूर चुनें</button></div></div>`).join('')}
+function filterTours(){let d=document.getElementById('searchDest').value,b=Number(document.getElementById('searchBudget').value||999999);renderTours(tours.filter(t=>(!d||t.dest===d)&&t.price<=b));}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id==='admin')renderAdmin()}
+function startBooking(id){selected=tours.find(t=>t.id===id);document.getElementById('sumName').textContent=selected.name;document.getElementById('sumDesc').textContent=selected.duration+' • '+selected.desc;document.getElementById('sumPrice').textContent=money(selected.price);document.getElementById('bDate').value=document.getElementById('searchDate').value||'';updateTotal();showPage('booking')}
+function updateTotal(){if(!selected)return;let n=Number(document.getElementById('bCount').value);document.getElementById('sumCount').textContent=n;document.getElementById('sumTotal').textContent=money(selected.price*n)}
+function getBookings(){try{return JSON.parse(localStorage.getItem('tsBookings')||'[]')}catch(e){return []}}
+function saveBookings(b){localStorage.setItem('tsBookings',JSON.stringify(b))}
+function submitBooking(){let name=document.getElementById('bName').value.trim(),phone=document.getElementById('bPhone').value.trim(),date=document.getElementById('bDate').value,count=Number(document.getElementById('bCount').value);if(!name||!phone||!date){alert('नाम, मोबाइल और तारीख भरें।');return}if(!/^[0-9+\-\s]{10,15}$/.test(phone)){alert('कृपया सही मोबाइल नंबर भरें।');return}if(!document.getElementById('bAgree').checked){alert('कृपया शर्तों से सहमत हों।');return}let b=getBookings(),id='TS-'+Date.now().toString().slice(-7);b.push({id,name,phone,email:document.getElementById('bEmail').value,tour:selected.name,destination:selected.dest,date,count,total:selected.price*count,pickup:document.getElementById('bPickup').value,notes:document.getElementById('bNotes').value,status:'Pending'});saveBookings(b);document.getElementById('confirmText').innerHTML=`धन्यवाद <b>${name}</b>! आपकी रिक्वेस्ट ID <b>${id}</b> है। हमारी टीम आपकी तारीख और उपलब्धता की पुष्टि करेगी।`;showPage('confirmation')}
+function renderAdmin(){let b=getBookings();document.getElementById('aCount').textContent=b.length;if(!b.length){document.getElementById('adminTable').innerHTML='<p class="muted">अभी कोई डेमो बुकिंग नहीं है।</p>';return}document.getElementById('adminTable').innerHTML=`<div style="overflow:auto"><table><thead><tr><th>ID</th><th>यात्री</th><th>टूर</th><th>तारीख</th><th>लोग</th><th>कुल</th><th>स्थिति</th></tr></thead><tbody>${b.map(x=>`<tr><td>${x.id}</td><td>${x.name}<br><small>${x.phone}</small></td><td>${x.tour}</td><td>${x.date}</td><td>${x.count}</td><td>${money(x.total)}</td><td>${x.status}</td></tr>`).join('')}</tbody></table></div>`}
+function exportBookings(){let b=getBookings();if(!b.length){alert('कोई बुकिंग नहीं है');return}let keys=Object.keys(b[0]),csv=[keys.join(','),...b.map(o=>keys.map(k=>'"'+String(o[k]??'').replaceAll('"','""')+'"').join(','))].join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv'}));a.download='tripsathi-bookings-demo.csv';a.click()}
+function clearBookings(){if(confirm('डेमो बुकिंग हटाएँ?')){saveBookings([]);renderAdmin()}}
+function contactRequest(){let n=document.getElementById('cName').value,p=document.getElementById('cPhone').value,m=document.getElementById('cMsg').value;if(!n||!p||!m){alert('कृपया सभी जानकारी भरें');return}document.getElementById('cResult').textContent='डेमो रिक्वेस्ट भर दी गई। लाइव साइट में इसे सर्वर/WhatsApp से जोड़ना होगा।'}
+renderTours();
+</script>
+</body>
+</html>
